@@ -1,4 +1,4 @@
-#War: The Card Game
+# War: The Card Game
 Two players draw five cards. They then conduct a skirmish where each round they choose a card to play. Both cards are 
 "discarded," so the player with an Ace of Hearts can't just sweep the entire deck. When a player wins best out of three, 
 they "capture" their opponent's entire hand, sending the cards to the bottom of their own deck. The loser player draws 
