@@ -12,12 +12,12 @@
 }
 .played-card::before {
     top: 3%;
-    left: 7.5%;
+    left: 5%;
 }
 
 .played-card::after {
     bottom: 3%;
-    right: 7.5%;
+    right: 5%;
     transform: rotate(180deg);
 }
 
@@ -27,4 +27,8 @@
 
 .black {
     color: black;
+}
+
+.hidden {
+    opacity: 0 !important;
 }

@@ -2,10 +2,10 @@ import React from 'react';
 
 import "../styles/DisplayDeck.style.css"
 
-const DisplayDeck = ({isPlayer}) => {
+const DisplayDeck = ({isPlayer, cardNum}) => {
 	return (
-		<div className={`card-layout ${(isPlayer) ? "player" : "computer"}-deck deck`}>
-			26
+		<div className={`card-layout ${(isPlayer) ? "player" : "computer"}-deck deck` }>
+			{cardNum}
 		</div>
 	);
 };

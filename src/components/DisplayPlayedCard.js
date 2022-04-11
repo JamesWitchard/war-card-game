@@ -1,14 +1,24 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 
 import "../styles/DisplayPlayedCard.style.css"
 
-const DisplayPlayedCard = ({isPlayer}) => {
+const DisplayPlayedCard = ({isPlayer, hidden, drawnCard}) => {
+	const [cardColour, setCardColour] = useState("");
+
+	useEffect(() => {
+		setCardColour((drawnCard?.suit === "♥" || drawnCard?.suit === "♦") ? 'red' : "black");
+		console.log(drawnCard)
+	}, [drawnCard])
 	return (
 		<div
-			className={` ${(isPlayer) ? "player" : "computer"}-played-card played-card red card-layout `}
-			data-value="9♥"
+			className={` ${(isPlayer) ? "player" : "computer"}-played-card 
+				played-card 
+				${cardColour}
+				card-layout 
+				${hidden ? 'hidden' : ''}`}
+			data-value={`${drawnCard?.value} ${drawnCard?.suit}`}
 		>
-			♥
+			{drawnCard?.suit}
 		</div>
 	);
 };
