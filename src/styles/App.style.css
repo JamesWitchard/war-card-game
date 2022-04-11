@@ -1,0 +1,16 @@
+:root {
+    --card-width: 241px;
+    --card-height: 329px;
+}
+
+.App {
+
+}
+
+.container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}

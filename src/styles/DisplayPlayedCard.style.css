@@ -1,0 +1,30 @@
+.played-card {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 10rem;
+}
+.played-card::before, .played-card::after {
+    position: absolute;
+    content: attr(data-value);
+    font-size: 2.25rem;
+}
+.played-card::before {
+    top: 3%;
+    left: 7.5%;
+}
+
+.played-card::after {
+    bottom: 3%;
+    right: 7.5%;
+    transform: rotate(180deg);
+}
+
+.red {
+    color: red;
+}
+
+.black {
+    color: black;
+}
