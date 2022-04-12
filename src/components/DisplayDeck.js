@@ -1,6 +1,6 @@
 import React from 'react';
 
-import "../styles/DisplayDeck.style.css"
+//import "../styles/DisplayDeck.style.css"
 
 const DisplayDeck = ({isPlayer, cardNum}) => {
 	return (

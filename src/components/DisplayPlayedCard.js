@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 
-import "../styles/DisplayPlayedCard.style.css"
+// import "../styles/DisplayPlayedCard.style.css"
 
 const DisplayPlayedCard = ({isPlayer, hidden, drawnCard}) => {
 	const [cardColour, setCardColour] = useState("");

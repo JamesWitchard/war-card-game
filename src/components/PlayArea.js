@@ -3,7 +3,7 @@ import React from 'react';
 import DisplayDeck from "./DisplayDeck";
 import DisplayPlayedCard from "./DisplayPlayedCard";
 
-import "../styles/PlayArea.style.css"
+//import "../styles/PlayArea.style.css"
 
 const PlayArea = ({isPlayer, deck, hidden, drawnCard}) => {
 	return (
