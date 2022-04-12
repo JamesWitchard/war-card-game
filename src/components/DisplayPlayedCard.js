@@ -7,7 +7,7 @@ const DisplayPlayedCard = ({isPlayer, hidden, drawnCard}) => {
 
 	useEffect(() => {
 		setCardColour((drawnCard?.suit === "♥" || drawnCard?.suit === "♦") ? 'red' : "black");
-		console.log(drawnCard)
+		//console.log(drawnCard)
 	}, [drawnCard])
 	return (
 		<div

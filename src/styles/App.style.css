@@ -4,7 +4,8 @@
 }
 
 .App {
-
+    min-width: 100vw;
+    background: radial-gradient(circle, #207020 20%, #093a09 80%);
 }
 
 .container {
@@ -13,4 +14,8 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+.hidden {
+    opacity: 0 !important;
 }

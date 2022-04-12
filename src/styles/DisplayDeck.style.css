@@ -5,13 +5,32 @@
     font-size: 5rem;
     font-weight: bold;
     color: white;
-    text-shadow: 0 0 5rem white;
+    text-shadow: 0 0 .25rem firebrick,
+                 0 0 .5rem orangered,
+                 0 0 3rem white,
+                 0 0 3rem white,
+                 0 0 3rem white,
+                 0 0 3rem white,
+                 0 0 3rem white,
+                 0 0 3rem white;
 }
 
 .player-deck {
-    background-color: dodgerblue !important;
+    background: repeating-linear-gradient(
+        45deg,
+        #2837B8 0%,
+        #2837B8 1%,
+        white 1%,
+        white 2%
+    );
 }
 
 .computer-deck {
-    background-color: darkslategray !important;
+    background: repeating-linear-gradient(
+            45deg,
+            #BD1E1E 0%,
+            #BD1E1E 1%,
+            white 1%,
+            white 2%
+    );
 }

@@ -11,13 +11,13 @@
     font-size: 2.25rem;
 }
 .played-card::before {
-    top: 3%;
-    left: 5%;
+    top: -3%;
+    left: 2%;
 }
 
 .played-card::after {
-    bottom: 3%;
-    right: 5%;
+    bottom: -3%;
+    right: 2%;
     transform: rotate(180deg);
 }
 
@@ -29,6 +29,3 @@
     color: black;
 }
 
-.hidden {
-    opacity: 0 !important;
-}
