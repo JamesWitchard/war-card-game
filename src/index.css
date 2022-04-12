@@ -13,6 +13,8 @@ body {
   cursor: pointer;
   user-select: none;
   color: white;
+  background: radial-gradient(circle, #207020 20%, #093a09 80%);
+
 }
 
 h1 {

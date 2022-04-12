@@ -1,11 +1,10 @@
 :root {
-    --card-width: 241px;
-    --card-height: 329px;
+    --card-width: calc(241px * 1);
+    --card-height: calc(329px * 1);
 }
 
 .App {
     min-width: 100vw;
-    background: radial-gradient(circle, #207020 20%, #093a09 80%);
 }
 
 .container {
