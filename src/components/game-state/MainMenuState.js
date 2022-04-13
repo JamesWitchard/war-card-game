@@ -1,6 +1,6 @@
 import React from 'react';
 
-const MainMenu = ({clickEvent}) => {
+const MainMenuState = ({clickEvent}) => {
 	return (
 		<>
 			<button onClick={clickEvent}>Start Game!</button>
@@ -8,4 +8,4 @@ const MainMenu = ({clickEvent}) => {
 	);
 };
 
-export default MainMenu;
+export default MainMenuState;
