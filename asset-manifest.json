@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.js": "/war-card-game/advanced/static/js/main.46032272.js",
-    "index.html": "/war-card-game/advanced/index.html",
-    "main.46032272.js.map": "/war-card-game/advanced/static/js/main.46032272.js.map"
+    "main.js": "/war-card-game/static/js/main.46032272.js",
+    "index.html": "/war-card-game/index.html",
+    "main.46032272.js.map": "/war-card-game/static/js/main.46032272.js.map"
   },
   "entrypoints": [
     "static/js/main.46032272.js"
