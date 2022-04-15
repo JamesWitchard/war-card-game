@@ -37,10 +37,24 @@ export default class Deck {
 	}
 };
 
-class Card {
+export class Card {
 	constructor(suit, value) {
 		this.suit = suit;
-		this.value = value
+		this.value = value;
+	}
+
+	get getSuit() {
+		return this.suit;
+	}
+
+	get getValue() {
+		return this.value;
+	}
+	get getCardValue () {
+		return CARD_VALUE_MAP[this.value];
+	}
+	printCard() {
+		return `${this.value} ${this.suit}`;
 	}
 }
 

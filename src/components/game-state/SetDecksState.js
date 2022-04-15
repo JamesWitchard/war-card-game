@@ -1,6 +1,9 @@
-import React, {useEffect} from 'react';
+import React, {useContext, useEffect} from 'react';
+import {GameStateContext} from "../../App";
 
-const SetDecksState = ({playerNum, nextState, dealDecks}) => {
+const SetDecksState = () => {
+
+	const {numPlayers, nextState, dealDecks} = useContext(GameStateContext)
 
 	useEffect(() => {
 		dealDecks();
@@ -11,7 +14,7 @@ const SetDecksState = ({playerNum, nextState, dealDecks}) => {
 
 	return (
 		<p>
-			{`Dealing cards out to ${playerNum} players.`}
+			{`Dealing cards out to ${numPlayers} players.`}
 		</p>
 	);
 };

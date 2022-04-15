@@ -1,6 +1,9 @@
-import React, {useEffect} from 'react';
+import React, {useContext, useEffect} from 'react';
+import {GameStateContext} from "../../App";
 
-const ShuffleState = ({nextState, startGame}) => {
+const ShuffleState = () => {
+
+	const {nextState, startGame} = useContext(GameStateContext);
 
 	useEffect(() => {
 		startGame();

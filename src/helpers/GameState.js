@@ -33,7 +33,7 @@ export const GAME_STATE = {
 	playerChooseCard: {
 		state: "playerChooseCard",
 		prevState: "drawCards",
-		nextState: "playerChooseCard"
+		nextState: "revealCard"
 	},      // loops four times until all players have chosen card
 	revealCard: {
 		state: "revealCard",

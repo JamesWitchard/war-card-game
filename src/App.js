@@ -1,40 +1,42 @@
-import {useEffect, useRef, useState} from "react";
-import PlayArea from "./components/PlayArea";
-import Deck, {CARD_VALUE_MAP} from "./helpers/Deck";
+import {createContext, useEffect, useMemo, useRef, useState} from "react";
+import Deck, {Card} from "./helpers/Deck";
 import MainMenuState from "./components/game-state/MainMenuState";
 import SetPlayersState from "./components/game-state/SetPlayersState";
 import ShuffleState from "./components/game-state/ShuffleState";
 import SetDecksState from "./components/game-state/SetDecksState";
 import {GAME_STATE} from "./helpers/GameState";
 import DrawCardState from "./components/game-state/DrawCardState";
-import Utils from "./helpers/Utils";
+import PlayerChooseCardState from "./components/game-state/PlayerChooseCardState";
+import PlayerArea from "./components/PlayerArea";
+
 //import './styles/App.style.css';
 
+export const GameStateContext = createContext(null);
 
 function App() {
 	const [gameState, setGameState] = useState(GAME_STATE.mainMenu)
 	const [currentState, setCurrentState] = useState("");
 	const [numPlayers, setNumPlayers] = useState();
-	const [currentPlayer, setCurrentPlayer] = useState(1);
-	const [playerDecks, setPlayerDecks] = useState([])
+	const [currentPlayer, setCurrentPlayer] = useState(0);
+	const [playerDecks, setPlayerDecks] = useState([]);
 	const [playerHands, setPlayerHands] = useState([]);
+	const [playedCard, setPlayedCard] = useState([]);
+	const [revealed, setRevealed] = useState(true);
 	const optionRef = useRef();
 
 	const HAND_SIZE = 5;
-
 	const nextState = () => {
 		setGameState(GAME_STATE[gameState.nextState]);
 	}
-
 	const prevState = () => {
 		setGameState(GAME_STATE[gameState.prevState]);
 	}
-
 	const gotoState = (state) => {
 		setGameState(state);
 	}
 
 	const setNumberOfPlayers = (playerAmount) => {
+		console.log(playerAmount);
 		setNumPlayers(playerAmount);
 		nextState();
 	}
@@ -71,79 +73,73 @@ function App() {
 			setPlayerHands(prev => [...prev, hand]);
 			setPlayerDecks(tempPlayerDecks);
 		}
-		console.log(handArray);
 	}
 
 	const startGame = () => {
-		setPlayerDecks([]);
-		setPlayerHands([]);
+		setPlayerDecks(() => []);
+		setPlayerHands(() => []);
+		setPlayedCard(() => []);
 	}
 
+	const playCard = (cardIndex, playerIndex) => {
+		setRevealed(false)
+		const tempPlayerHands = [...playerHands];
+		const tempPlayedCard = [...playedCard];
+		tempPlayedCard[playerIndex] = tempPlayerHands[playerIndex].splice(cardIndex, 1)[0];
+		setPlayerHands([...tempPlayerHands]);
+		setPlayedCard([...tempPlayedCard]);
+	};
+
+	const computerPlayedCard = (playerIndex) => {
+		if (playerIndex === 0) return;
+		if (playerHands[playerIndex].length <= 0) return;
+		const tempPlayerHands = [...playerHands];
+		const card = tempPlayerHands[playerIndex].reduce((current, previous) => {
+			return (current.getCardValue > previous.getCardValue ) ? current : previous});
+		const cardIndex = tempPlayerHands[playerIndex].indexOf(card);
+		playCard(cardIndex, playerIndex);
+	};
+
+	const initializePlayedCards = () => {
+		const tempPlayedCards = []
+		for (let i = 0; i < numPlayers; i++) {
+			tempPlayedCards[i] = new Card(null, null);
+		}
+		setPlayedCard([...tempPlayedCards]);
+	};
+
+	const revealCards = () => {
+		setRevealed(true);
+		setTimeout(initializePlayedCards, 2000);
+	};
+
+	const gameStateValues = {
+		nextState,
+		prevState,
+		gotoState,
+		setNumberOfPlayers,
+		startGame,
+		dealDecks,
+		drawCards,
+		gameState,
+		numPlayers,
+		playerDecks,
+		playerHands
+	};
+
 	useEffect(() => {
-		// switch (gameState.state) {
-		// 	case "mainMenu": {
-		// 		setCurrentState(`The current state is: ${gameState.state}`);
-		// 		break;
-		// 	}
-		// 	case "setPlayers": {
-		// 		setCurrentState(`The current state is: ${gameState.state}`);
-		// 		break;
-		// 	}
-		// 	case "shuffle": {
-		// 		setCurrentState(`The current state is: ${gameState.state}`);
-		// 		break;
-		// 	}
-		// 	case "setDecks": {
-		// 		setCurrentState(`The current state is: ${gameState.state}`);
-		// 		break;
-		// 	}
-		// 	case "drawCards": {
-		// 		setCurrentState(`The current state is: ${gameState.state}`);
-		// 		break;
-		// 	}
-		// 	case "playerChooseCard": {
-		// 		setCurrentState(`The current state is: ${gameState.state}`);
-		// 		break;
-		// 	}
-		// 	case "revealCard": {
-		// 		setCurrentState(`The current state is: ${gameState.state}`);
-		// 		break;
-		// 	}
-		// 	case "determineSkirmishWinner": {
-		// 		setCurrentState(`The current state is: ${gameState.state}`);
-		// 		break;
-		// 	}
-		// 	case "skirmishResultScreen": {
-		// 		setCurrentState(`The current state is: ${gameState.state}`);
-		// 		break;
-		// 	}
-		// 	case "determineBattleWinner": {
-		// 		setCurrentState(`The current state is: ${gameState.state}`);
-		// 		break;
-		// 	}
-		// 	case "battleResultScreen": {
-		// 		setCurrentState(`The current state is: ${gameState.state}`);
-		// 		break;
-		// 	}
-		// 	case "determineWarWinner": {
-		// 		setCurrentState(`The current state is: ${gameState.state}`);
-		// 		break;
-		// 	}
-		// 	case "resultScreen": {
-		// 		setCurrentState(`The current state is: ${gameState.state}`);
-		// 		break;
-		// 	}
-		// 	default: {
-		// 		break;
-		// 	}
-		// }
 		setCurrentState(`The current state is: ${gameState.state}`);
 	}, [gameState])
 
+	useEffect(initializePlayedCards, [numPlayers])
 
+	useEffect(() => {
+		startGame();
+	}, [])
 	return (
 		<div className="App">
 			<div className="container">
+				<editor-fold desc="Debug Tools">
 				<h1>{currentState}</h1>
 				<button onClick={prevState}>Previous State</button>
 				<button onClick={nextState}>Next State</button>
@@ -157,20 +153,48 @@ function App() {
 					<button onClick={(e) => {
 						e.preventDefault();
 						gotoState(GAME_STATE[optionRef.current.value])
-					}}>Go To State</button>
+					}}>Go To State
+					</button>
 				</form>
-				{gameState.state === "mainMenu" && <MainMenuState clickEvent={nextState}/>}
-				{gameState.state === "setPlayers" && <SetPlayersState clickEvent={setNumberOfPlayers}/>}
-				{gameState.state === "shuffle" && <ShuffleState nextState={nextState} startGame={startGame}/>}
-				{gameState.state === "setDecks" &&
-					<SetDecksState playerNum={numPlayers} nextState={nextState} dealDecks={dealDecks}/>}
+				</editor-fold>
+				<GameStateContext.Provider value={gameStateValues} >
+					{gameState.state === "mainMenu" && <MainMenuState />}
+					{gameState.state === "setPlayers" && <SetPlayersState />}
+					{gameState.state === "shuffle" && <ShuffleState />}
+					{gameState.state === "setDecks" && <SetDecksState />}
+					{gameState.state === "drawCards" && <DrawCardState />}
+					{gameState.state === "playerChooseCard" && <PlayerChooseCardState />}
+					{playerDecks?.map((deck, index) => {
+						return <PlayerArea key={`player-${index+1}-area`} playerIndex={index} />})}
+				</GameStateContext.Provider>
+
+				<div>{playerHands[0]?.map((card, index) => {
+					return <button
+						key={`player-card-${index}`}
+						className={"card player-card"}
+						onClick={() => playCard(index, 0)}
+					>
+						{card.printCard()}
+					</button>
+				})}</div>
+				<div> {playerHands?.map((player, index) => {
+					if (index === 0) return;
+					return <button key={`player-${index}-button`}
+					               onClick={() => computerPlayedCard(index)}
+					               disabled={player.length <= 0}
+					>
+						{`Player ${index + 1} play card`}
+					</button>
+				})}
+				</div>
+				{gameState.state === "drawCards" && <h2>{playedCard?.map((card, index) => <div
+					key={`played-card-${index}`}>{card.getSuit !== null && `Player ${index + 1} played: ${revealed ? card.printCard() : "Hidden"}`}</div>)}</h2>}
 				{gameState.state === "drawCards" &&
-					<DrawCardState
-						playerNum={numPlayers}
-						playerDecks={playerDecks}
-						drawCards={drawCards}
-						playerHands={playerHands}
-					/>}
+					<button
+						disabled={playedCard.some((card) => card.suit === null)}
+						onClick={revealCards}
+					>
+						Reveal Cards!</button>}
 			</div>
 		</div>
 	);

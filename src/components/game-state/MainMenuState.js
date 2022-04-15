@@ -1,9 +1,11 @@
-import React from 'react';
+import React, {useContext} from 'react';
+import {GameStateContext} from "../../App";
 
-const MainMenuState = ({clickEvent}) => {
+const MainMenuState = () => {
+	const {nextState} = useContext(GameStateContext);
 	return (
 		<>
-			<button onClick={clickEvent}>Start Game!</button>
+			<button onClick={() => nextState()}>Start Game!</button>
 		</>
 	);
 };

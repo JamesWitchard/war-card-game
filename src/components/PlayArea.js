@@ -1,6 +1,6 @@
 import React from 'react';
 
-import DisplayDeck from "./DisplayDeck";
+import DeckComponent from "./DeckComponent";
 import DisplayPlayedCard from "./DisplayPlayedCard";
 
 //import "../styles/PlayArea.style.css"
@@ -10,7 +10,7 @@ const PlayArea = ({isPlayer, deck, hidden, drawnCard}) => {
 		<div className="play-area">
 			{!isPlayer && <h1>{isPlayer ? "Player" : "Computer"} Area</h1>}
 			<div className="cards-area">
-				<DisplayDeck isPlayer={isPlayer} cardNum={deck.numberOfCards}/>
+				<DeckComponent isPlayer={isPlayer} cardNum={deck.numberOfCards}/>
 				<DisplayPlayedCard isPlayer={isPlayer} hidden={hidden} drawnCard={drawnCard}/>
 			</div>
 			{isPlayer && <h1>{isPlayer ? "Player" : "Computer"} Area</h1>}
