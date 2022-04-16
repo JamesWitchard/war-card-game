@@ -1,5 +1,5 @@
 import React, {useContext} from 'react';
-import {DeckStyle} from "../styles/Deck.Style";
+import {DeckComponentStyle} from "../styles/DeckComponent.style";
 import {GameStateContext} from "../App";
 
 //import "../styles/DeckComponent.style.css"
@@ -8,9 +8,9 @@ const DeckComponent = ({playerIndex}) => {
 
 	const {playerDecks} = useContext(GameStateContext)
 	return (
-		<DeckStyle>
+		<DeckComponentStyle>
 			{playerDecks[playerIndex].cards.length}
-		</DeckStyle>
+		</DeckComponentStyle>
 	);
 };
 

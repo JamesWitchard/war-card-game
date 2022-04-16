@@ -11,9 +11,9 @@ const DrawCardState = () => {
 	return (
 		<>
 			<button onClick={drawCards}>Draw!</button>
-			{playerDecks.map((deck, index) => {
-				return <p key={`deck-${index}`}><strong>{`Player ${index + 1} Deck - `}</strong>
-					{deck.cards.length} </p>})}
+			{/*{playerDecks.map((deck, index) => {*/}
+			{/*	return <p key={`deck-${index}`}><strong>{`Player ${index + 1} Deck - `}</strong>*/}
+			{/*		{deck.cards.length} </p>})}*/}
 			{/*{playerHands.map((player, index) => {*/}
 			{/*	return <p key={`hand-${index + 1}`}><strong>{`Player ${index + 1} Hand - `}</strong>*/}
 			{/*		{player.map((card, idx) => {*/}

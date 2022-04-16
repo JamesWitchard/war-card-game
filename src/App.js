@@ -121,10 +121,13 @@ function App() {
 		startGame,
 		dealDecks,
 		drawCards,
+		playCard,
 		gameState,
 		numPlayers,
+		currentPlayer,
 		playerDecks,
-		playerHands
+		playerHands,
+		revealed
 	};
 
 	useEffect(() => {
@@ -168,15 +171,6 @@ function App() {
 						return <PlayerArea key={`player-${index+1}-area`} playerIndex={index} />})}
 				</GameStateContext.Provider>
 
-				<div>{playerHands[0]?.map((card, index) => {
-					return <button
-						key={`player-card-${index}`}
-						className={"card player-card"}
-						onClick={() => playCard(index, 0)}
-					>
-						{card.printCard()}
-					</button>
-				})}</div>
 				<div> {playerHands?.map((player, index) => {
 					if (index === 0) return;
 					return <button key={`player-${index}-button`}
