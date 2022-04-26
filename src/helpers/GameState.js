@@ -60,11 +60,6 @@ export const GAME_STATE = {
 		prevState: "determineBattleWinner",
 		nextState: "drawCards"
 	},   	// loops back to draw another hand of cards
-	determineWarWinner: {
-		state: "determineWarWinner",
-		prevState: "battleResultScreen",
-		nextState: "resultScreen"
-	},
 	resultScreen: {
 		state: "resultScreen",
 		prevState: "determineWarWinner",
